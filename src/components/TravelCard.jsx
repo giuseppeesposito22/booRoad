@@ -12,7 +12,10 @@ export default function TravelCard({ viaggio }) {
               <span>{viaggio.data_inizio}</span> <br />
               <span>{viaggio.data_fine}</span>
             </p>
-            <Link to="" className="btn btn-primary">
+            <Link
+              to={`/travels/${viaggio.id_viaggio}`}
+              className="btn btn-primary"
+            >
               Vai al dettaglio
             </Link>
           </div>
