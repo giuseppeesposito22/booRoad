@@ -9,8 +9,6 @@ function TravelDetailPage() {
   const [option, setOption] = useState("");
   const [selectedPerson, setSelectedPerson] = useState(viaggio.partecipanti);
 
-  console.log("primo log:", selectedPerson);
-
   useEffect(() => {
     const filter = viaggio.partecipanti.filter((currentPerson) => {
       const fullName = currentPerson.nome + " " + currentPerson.cognome;
@@ -18,7 +16,6 @@ function TravelDetailPage() {
     });
 
     setSelectedPerson(filter);
-    console.log(filter);
   }, [option]);
 
   return (
@@ -35,50 +32,52 @@ function TravelDetailPage() {
         onChange={function (event) {
           setOption(event.target.value);
         }}
-        className="form-select"
+        className="form-select my-5"
         aria-label="Default select example"
       >
         <option value="">Filtra per nome e cognome</option>
-        {viaggio.partecipanti.map((partecipante, index) => {
-          const fullName = partecipante.nome + " " + partecipante.cognome;
-          return (
-            <option key={index} value={fullName}>
-              {fullName}
-            </option>
-          );
-        })}
+        {viaggio.partecipanti &&
+          viaggio.partecipanti.map((partecipante, index) => {
+            const fullName = partecipante.nome + " " + partecipante.cognome;
+            return (
+              <option key={index} value={fullName}>
+                {fullName}
+              </option>
+            );
+          })}
       </select>
 
       <div className="row">
-        {selectedPerson.map((partecipante, index) => (
-          <div key={index} className="accordion" id="accordionExample">
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target={`#collapse${index}`}
-                  aria-expanded="true"
-                  aria-controls={`collapse${index}`}
+        {selectedPerson &&
+          selectedPerson.map((partecipante, index) => (
+            <div key={index} className="accordion" id="accordionExample">
+              <div className="accordion-item">
+                <h2 className="accordion-header">
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#collapse${index}`}
+                    aria-expanded="true"
+                    aria-controls={`collapse${index}`}
+                  >
+                    {`${partecipante.nome} ${partecipante.cognome}`}
+                  </button>
+                </h2>
+                <div
+                  id={`collapse${index}`}
+                  className="accordion-collapse collapse"
+                  data-bs-parent="#accordionExample"
                 >
-                  {`${partecipante.nome} ${partecipante.cognome}`}
-                </button>
-              </h2>
-              <div
-                id={`collapse${index}`}
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <p>Codice Fiscale: {partecipante.codice_fiscale}</p>
-                  <p>Email: {partecipante.mail}</p>
-                  <p>Numero di telefono: {partecipante.numero_di_telefono}</p>
+                  <div className="accordion-body">
+                    <p>Codice Fiscale: {partecipante.codice_fiscale}</p>
+                    <p>Email: {partecipante.mail}</p>
+                    <p>Numero di telefono: {partecipante.numero_di_telefono}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
