@@ -103,6 +103,7 @@ export default function GuestForm({ onAddGuest, show }) {
               numero_di_telefono: e.target.value,
             })
           }
+          required
         />
 
         <div className="d-flex justify-content-center">
