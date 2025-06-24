@@ -29,7 +29,7 @@ function TravelDetailPage() {
   }, [option, partecipanti]);
 
   return (
-    <div className="container">
+    <div className="container my-5">
       <div className="d-flex flex-column justify-content-center align-items-center border my-5 p-3 bg-body-secondary rounded-3">
         <h1>{viaggio.destinazione}</h1>
         <p>

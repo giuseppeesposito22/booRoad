@@ -10,10 +10,10 @@ export default function NewTravelPage() {
 
   const [travel, setTravel] = useState({
     id_viaggio: travelId,
-    destinazione: "asd",
+    destinazione: "",
     data_inizio: "",
     data_fine: "",
-    costo: "213423",
+    costo: "",
     partecipanti: [],
     immagine: "src/assets/img/placeholder.jpg",
   });
