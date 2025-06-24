@@ -6,8 +6,6 @@ import TravelForm from "../components/TravelForm";
 export default function NewTravelPage() {
   const travelId = (viaggi.length + 1).toString();
 
-  console.log(travelId);
-
   const [travel, setTravel] = useState({
     id_viaggio: travelId,
     destinazione: "",
@@ -22,6 +20,9 @@ export default function NewTravelPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (travel.data_fine < travel.data_inizio) {
+      return alert("La data di fine deve essere successiva a quella di inizio");
+    }
     viaggi.push(travel);
     console.log(travel, viaggi);
 
