@@ -1,9 +1,26 @@
 import { useParams } from "react-router";
 import { viaggi } from "../data/data";
+import React, { useState, useEffect } from "react";
 
 function TravelDetailPage() {
   const { id } = useParams();
   const viaggio = viaggi.find((viaggio) => viaggio.id_viaggio === id);
+
+  const [option, setOption] = useState("");
+  const [selectedPerson, setSelectedPerson] = useState(viaggio.partecipanti);
+
+  console.log("primo log:", selectedPerson);
+
+  useEffect(() => {
+    const filter = viaggio.partecipanti.filter((currentPerson) => {
+      const fullName = currentPerson.nome + " " + currentPerson.cognome;
+      return option === "" || fullName === option;
+    });
+
+    setSelectedPerson(filter);
+    console.log(filter);
+  }, [option]);
+
   return (
     <div className="container">
       <h1>{viaggio.destinazione}</h1>
@@ -12,8 +29,28 @@ function TravelDetailPage() {
       </p>
       <p>Costo: €{viaggio.costo}</p>
       <h2>Partecipanti</h2>
+
+      <select
+        value={option}
+        onChange={function (event) {
+          setOption(event.target.value);
+        }}
+        className="form-select"
+        aria-label="Default select example"
+      >
+        <option value="">Filtra per nome e cognome</option>
+        {viaggio.partecipanti.map((partecipante, index) => {
+          const fullName = partecipante.nome + " " + partecipante.cognome;
+          return (
+            <option key={index} value={fullName}>
+              {fullName}
+            </option>
+          );
+        })}
+      </select>
+
       <div className="row">
-        {viaggio.partecipanti.map((partecipante, index) => (
+        {selectedPerson.map((partecipante, index) => (
           <div key={index} className="accordion" id="accordionExample">
             <div className="accordion-item">
               <h2 className="accordion-header">
