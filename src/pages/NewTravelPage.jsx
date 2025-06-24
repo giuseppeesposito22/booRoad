@@ -13,18 +13,23 @@ export default function NewTravelPage() {
     data_fine: "",
     costo: "",
     partecipanti: [],
-    immagine: "src/assets/img/placeholder.jpg",
+    immagine: "",
   });
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (travel.data_fine < travel.data_inizio) {
       return alert("La data di fine deve essere successiva a quella di inizio");
     }
-    viaggi.push(travel);
-    console.log(travel, viaggi);
+
+    const addTravel = travel.immagine
+      ? travel
+      : { ...travel, immagine: "src/assets/img/placeholder.jpg" };
+
+    viaggi.push(addTravel);
 
     navigate("/travels");
   };
