@@ -16,6 +16,7 @@ export default function GuestForm({ onAddGuest, show }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddGuest(guest);
+
     show(false);
 
     // console.log(travel, viaggi);

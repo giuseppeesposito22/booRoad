@@ -55,11 +55,13 @@ function TravelDetailPage() {
         />
       )}
 
-      <GuestFilterSelect
-        partecipanti={partecipanti}
-        setOption={setOption}
-        option={option}
-      />
+      {partecipanti.length > 1 && (
+        <GuestFilterSelect
+          partecipanti={partecipanti}
+          setOption={setOption}
+          option={option}
+        />
+      )}
 
       <GuestAccordion selectedPerson={selectedPerson} />
     </div>

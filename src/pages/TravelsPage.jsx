@@ -8,7 +8,7 @@ export default function TravelsPage() {
       <div className="container my-5">
         <div className="d-flex justify-content-between align-items-center my-5">
           <h1>I NOSTRI VIAGGI</h1>
-          <Link className="btn btn-primary" to="/newtravel">
+          <Link className="btn btn-primary" to="/travels/new">
             Aggiungi viaggio
           </Link>
         </div>
