@@ -11,6 +11,8 @@ function TravelDetailPage() {
   const [selectedPerson, setSelectedPerson] = useState(viaggio.partecipanti);
   const [partecipanti, setPartecipanti] = useState(viaggio.partecipanti);
 
+  const [showForm, setShowForm] = useState(false);
+
   useEffect(() => {
     const filter = partecipanti.filter((currentPerson) => {
       const fullName = currentPerson.nome + " " + currentPerson.cognome;
@@ -28,11 +30,18 @@ function TravelDetailPage() {
       </p>
       <p>Costo: €{viaggio.costo}</p>
       <h2>Partecipanti</h2>
-      <Link className="btn btn-primary">Aggiungi partecipante</Link>
+      <Link onClick={() => setShowForm(true)} className="btn btn-primary">
+        Aggiungi partecipante
+      </Link>
 
-      <GuestForm
-        onAddGuest={(newGuest) => setPartecipanti([...partecipanti, newGuest])}
-      />
+      {showForm && (
+        <GuestForm
+          show={setShowForm}
+          onAddGuest={(newGuest) =>
+            setPartecipanti([...partecipanti, newGuest])
+          }
+        />
+      )}
 
       <select
         value={option}

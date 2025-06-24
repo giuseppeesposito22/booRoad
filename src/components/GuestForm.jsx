@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { viaggi } from "../data/data";
 
-export default function GuestForm({ onAddGuest }) {
+export default function GuestForm({ onAddGuest, show }) {
   const [guest, setGuest] = useState({
     nome: "Mario",
     cognome: "Rossi",
@@ -16,6 +16,8 @@ export default function GuestForm({ onAddGuest }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddGuest(guest);
+    show(false);
+
     // console.log(travel, viaggi);
 
     // navigate("/travels");
