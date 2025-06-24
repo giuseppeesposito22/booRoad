@@ -1,18 +1,24 @@
+// Import
+
 import { Link, useParams } from "react-router";
 import { viaggi } from "../data/data";
 import React, { useState, useEffect } from "react";
 import GuestForm from "../components/GuestForm";
+import GuestFilterSelect from "../components/GuestFilterSelect";
+import GuestAccordion from "../components/GuestAccordion";
 
 function TravelDetailPage() {
+  // ID per prendere il post selezioanto
   const { id } = useParams();
   const viaggio = viaggi.find((viaggio) => viaggio.id_viaggio === id);
 
+  // Stati
   const [option, setOption] = useState("");
   const [selectedPerson, setSelectedPerson] = useState(viaggio.partecipanti);
   const [partecipanti, setPartecipanti] = useState(viaggio.partecipanti);
+  const [show, setShow] = useState(false);
 
-  const [showForm, setShowForm] = useState(false);
-
+  // UseEffect per visualizzare i partecipanti filtrati
   useEffect(() => {
     const filter = partecipanti.filter((currentPerson) => {
       const fullName = currentPerson.nome + " " + currentPerson.cognome;
@@ -24,77 +30,38 @@ function TravelDetailPage() {
 
   return (
     <div className="container">
-      <h1>{viaggio.destinazione}</h1>
-      <p>
-        Dal {viaggio.data_inizio} al {viaggio.data_fine}
-      </p>
-      <p>Costo: €{viaggio.costo}</p>
-      <h2>Partecipanti</h2>
-      <Link onClick={() => setShowForm(true)} className="btn btn-primary">
-        Aggiungi partecipante
-      </Link>
+      <div className="d-flex flex-column justify-content-center align-items-center border my-5 p-3 bg-body-secondary rounded-3">
+        <h1>{viaggio.destinazione}</h1>
+        <p>
+          Dal {viaggio.data_inizio} al {viaggio.data_fine}
+        </p>
+        <p>
+          <strong>€{viaggio.costo}</strong>
+        </p>
+      </div>
 
-      {showForm && (
+      <div className="d-flex justify-content-between align-items-center">
+        <h2>Partecipanti</h2>
+        <Link onClick={() => setShow(true)} className="btn btn-primary">
+          Aggiungi partecipante
+        </Link>
+      </div>
+      {show && (
         <GuestForm
-          show={setShowForm}
+          show={setShow}
           onAddGuest={(newGuest) =>
             setPartecipanti([...partecipanti, newGuest])
           }
         />
       )}
 
-      <select
-        value={option}
-        onChange={function (event) {
-          setOption(event.target.value);
-        }}
-        className="form-select my-5"
-        aria-label="Default select example"
-      >
-        <option value="">Filtra per nome e cognome</option>
-        {viaggio.partecipanti &&
-          viaggio.partecipanti.map((partecipante, index) => {
-            const fullName = partecipante.nome + " " + partecipante.cognome;
-            return (
-              <option key={index} value={fullName}>
-                {fullName}
-              </option>
-            );
-          })}
-      </select>
+      <GuestFilterSelect
+        partecipanti={partecipanti}
+        setOption={setOption}
+        option={option}
+      />
 
-      <div className="row">
-        {selectedPerson &&
-          selectedPerson.map((partecipante, index) => (
-            <div key={index} className="accordion" id="accordionExample">
-              <div className="accordion-item">
-                <h2 className="accordion-header">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target={`#collapse${index}`}
-                    aria-expanded="true"
-                    aria-controls={`collapse${index}`}
-                  >
-                    {`${partecipante.nome} ${partecipante.cognome}`}
-                  </button>
-                </h2>
-                <div
-                  id={`collapse${index}`}
-                  className="accordion-collapse collapse"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <p>Codice Fiscale: {partecipante.codice_fiscale}</p>
-                    <p>Email: {partecipante.mail}</p>
-                    <p>Numero di telefono: {partecipante.numero_di_telefono}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
+      <GuestAccordion selectedPerson={selectedPerson} />
     </div>
   );
 }

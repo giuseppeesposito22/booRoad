@@ -21,7 +21,7 @@ const viaggi = [
         numero_di_telefono: "+393339876543",
       },
     ],
-    immagine: "src/assets/img/placeholder.jpg",
+    immagine: "src/assets/img/parigi.jpg",
   },
   {
     id_viaggio: "2",
@@ -45,7 +45,7 @@ const viaggi = [
         numero_di_telefono: "+393331098765",
       },
     ],
-    immagine: "src/assets/img/placeholder.jpg",
+    immagine: "src/assets/img/roma.jpg",
   },
   {
     id_viaggio: "3",
@@ -76,7 +76,7 @@ const viaggi = [
         numero_di_telefono: "+393339871234",
       },
     ],
-    immagine: "src/assets/img/placeholder.jpg",
+    immagine: "src/assets/img/new-york-city.jpg",
   },
   {
     id_viaggio: "4",
@@ -107,7 +107,7 @@ const viaggi = [
         numero_di_telefono: "+393336543210",
       },
     ],
-    immagine: "src/assets/img/placeholder.jpg",
+    immagine: "src/assets/img/tokyo.jpg",
   },
 ];
 

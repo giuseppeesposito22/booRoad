@@ -4,11 +4,11 @@ import { viaggi } from "../data/data";
 
 export default function GuestForm({ onAddGuest, show }) {
   const [guest, setGuest] = useState({
-    nome: "Mario",
-    cognome: "Rossi",
-    mail: "mario.rossi@example.com",
-    codice_fiscale: "RSSMRA80A01H501J",
-    numero_di_telefono: "+393331234567",
+    nome: "",
+    cognome: "",
+    mail: "",
+    codice_fiscale: "",
+    numero_di_telefono: "",
   });
 
   //   const navigate = useNavigate();
@@ -25,8 +25,11 @@ export default function GuestForm({ onAddGuest, show }) {
 
   return (
     <>
-      <h1>New Guest</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className="my-3">Nuovo partecipante</h1>
+      <form
+        onSubmit={handleSubmit}
+        className="row g-2 border rounded-3 p-3 my-3"
+      >
         <label className="form-label">Nome</label>
         <input
           className="form-control"
@@ -77,6 +80,7 @@ export default function GuestForm({ onAddGuest, show }) {
           className="form-control"
           type="text"
           value={guest.codice_fiscale}
+          placeholder="CF"
           onChange={(e) =>
             setGuest({
               ...guest,
@@ -86,10 +90,12 @@ export default function GuestForm({ onAddGuest, show }) {
           required
         />
 
+        <label className="form-label">Numero di telefono</label>
         <input
           className="form-control"
           type="text"
           value={guest.numero_di_telefono}
+          placeholder="+39..."
           onChange={(e) =>
             setGuest({
               ...guest,
@@ -98,7 +104,11 @@ export default function GuestForm({ onAddGuest, show }) {
           }
         />
 
-        <button type="submit">Create New Guest</button>
+        <div className="d-flex justify-content-center">
+          <button className="btn btn-success my-3" type="submit">
+            Aggiungi partecipante
+          </button>
+        </div>
       </form>
     </>
   );
