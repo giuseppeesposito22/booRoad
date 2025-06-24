@@ -1,6 +1,7 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { viaggi } from "../data/data";
 import React, { useState, useEffect } from "react";
+import GuestForm from "../components/GuestForm";
 
 function TravelDetailPage() {
   const { id } = useParams();
@@ -8,15 +9,16 @@ function TravelDetailPage() {
 
   const [option, setOption] = useState("");
   const [selectedPerson, setSelectedPerson] = useState(viaggio.partecipanti);
+  const [partecipanti, setPartecipanti] = useState(viaggio.partecipanti);
 
   useEffect(() => {
-    const filter = viaggio.partecipanti.filter((currentPerson) => {
+    const filter = partecipanti.filter((currentPerson) => {
       const fullName = currentPerson.nome + " " + currentPerson.cognome;
       return option === "" || fullName === option;
     });
 
     setSelectedPerson(filter);
-  }, [option]);
+  }, [option, partecipanti]);
 
   return (
     <div className="container">
@@ -26,6 +28,11 @@ function TravelDetailPage() {
       </p>
       <p>Costo: €{viaggio.costo}</p>
       <h2>Partecipanti</h2>
+      <Link className="btn btn-primary">Aggiungi partecipante</Link>
+
+      <GuestForm
+        onAddGuest={(newGuest) => setPartecipanti([...partecipanti, newGuest])}
+      />
 
       <select
         value={option}
