@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { viaggi } from "../data/data";
 
-export default function GuestForm({ onAddGuest, show }) {
+export default function GuestForm({ onAddGuest, setShow }) {
   const [guest, setGuest] = useState({
     nome: "",
     cognome: "",
@@ -17,7 +17,7 @@ export default function GuestForm({ onAddGuest, show }) {
     e.preventDefault();
     onAddGuest(guest);
 
-    show(false);
+    setShow(false);
 
     // console.log(travel, viaggi);
 
@@ -26,7 +26,12 @@ export default function GuestForm({ onAddGuest, show }) {
 
   return (
     <>
-      <h1 className="my-3">Nuovo partecipante</h1>
+      <div className="d-flex justify-content-between align-items-center">
+        <h1 className="my-3">Nuovo partecipante</h1>
+        <button className="btn btn-danger" onClick={() => setShow(false)}>
+          X
+        </button>
+      </div>
       <form
         onSubmit={handleSubmit}
         className="row g-2 border rounded-3 p-3 my-3"

@@ -50,7 +50,7 @@ function TravelDetailPage() {
       </div>
       {show && (
         <GuestForm
-          show={setShow}
+          setShow={setShow}
           onAddGuest={(newGuest) =>
             setPartecipanti([...partecipanti, newGuest])
           }
