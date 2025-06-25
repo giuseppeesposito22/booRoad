@@ -26,12 +26,8 @@ export default function GuestForm({ onAddGuest, setShow }) {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center">
-        <h1 className="my-3">Nuovo partecipante</h1>
-        <button className="btn btn-danger" onClick={() => setShow(false)}>
-          X
-        </button>
-      </div>
+      <h1 className="my-3">Nuovo partecipante</h1>
+
       <form
         onSubmit={handleSubmit}
         className="row g-2 border rounded-3 p-3 my-3"
