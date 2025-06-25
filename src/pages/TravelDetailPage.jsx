@@ -38,7 +38,7 @@ function TravelDetailPage() {
           {formatDate(viaggio.data_fine)}
         </p>
         <p>
-          <strong>€{viaggio.costo}</strong>
+          <strong>{viaggio.costo}€</strong>
         </p>
       </div>
 
