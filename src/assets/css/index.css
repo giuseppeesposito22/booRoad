@@ -15,3 +15,7 @@ label {
 .navbar-toggler {
   background-color: white;
 }
+
+.body-home {
+  height: 90vh;
+}
