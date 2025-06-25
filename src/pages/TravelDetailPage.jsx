@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import GuestForm from "../components/GuestForm";
 import GuestFilterSelect from "../components/GuestFilterSelect";
 import GuestAccordion from "../components/GuestAccordion";
+import formatDate from "../data/utility";
 
 function TravelDetailPage() {
   // ID per prendere il post selezioanto
@@ -33,7 +34,8 @@ function TravelDetailPage() {
       <div className="d-flex flex-column justify-content-center align-items-center border my-5 p-3 bg-body-secondary rounded-3">
         <h1>{viaggio.destinazione}</h1>
         <p>
-          Dal {viaggio.data_inizio} al {viaggio.data_fine}
+          Dal {formatDate(viaggio.data_inizio)} al{" "}
+          {formatDate(viaggio.data_fine)}
         </p>
         <p>
           <strong>€{viaggio.costo}</strong>

@@ -1,12 +1,7 @@
 import { Link } from "react-router-dom";
+import formatDate from "../data/utility";
 
 export default function TravelCard({ viaggio }) {
-  const formatDate = (date) => {
-    if (!date) return "";
-
-    return new Date(date).toLocaleDateString("it-IT");
-  };
-
   return (
     <>
       <div className="col">
